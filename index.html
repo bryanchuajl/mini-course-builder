@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Programming for Engineering – Lesson 5: Making Decisions in Python</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Lesson 5: Making Decisions in Python</h1>
+    <button id="theme-toggle" type="button" aria-label="Switch between light and dark theme">Dark theme</button>
+  </header>
+
+  <nav id="lesson-nav" aria-label="Lessons">
+    <ul>
+      <li><a href="#outcomes">Outcomes</a></li>
+      <li><a href="#recap">Recap</a></li>
+      <li><a href="#if-statement">If statement</a></li>
+      <li><a href="#comparison-operators">Comparison</a></li>
+      <li><a href="#elif-else">Elif and else</a></li>
+      <li><a href="#logical-operators">Logical</a></li>
+      <li><a href="#exercises">Exercises</a></li>
+      <li><a href="#summary">Summary</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="outcomes" class="lesson">
+      <h2>Learning Outcomes</h2>
+      <p>Until now, your programs have run every line from top to bottom. In this lesson you will learn how to make a program choose what to do, so that different lines run depending on the situation.</p>
+      <p>By the end of the lesson you should be able to:</p>
+      <ul>
+        <li>explain how the code flows through an <code>if</code> statement in Python, and</li>
+        <li>write <code>if</code> statements that use comparison operators and logical operators in the right places.</li>
+      </ul>
+    </section>
+
+    <section id="recap" class="lesson">
+      <h2>Recap: Working with Strings</h2>
+      <p>Before moving on, here is a quick check of what you learned about strings. Try each question yourself before reading the answer.</p>
+      <ol>
+        <li>
+          <p>What is the index number of <code>'o'</code> in the string <code>'Python'</code>?</p>
+          <p>It is <strong>4</strong>. Index numbers start counting from 0, so P is 0, y is 1, t is 2, h is 3, o is 4 and n is 5.</p>
+        </li>
+        <li>
+          <p>Which function gives the length of a string?</p>
+          <p><code>len()</code>.</p>
+        </li>
+        <li>
+          <p>Given <code>a = 'Annie'</code> and <code>b = 'happy'</code>, which line displays <code>Annie is happy</code>?</p>
+          <p><code>print(a + ' is ' + b)</code>. The <code>+</code> sign joins strings together, so the spaces have to be part of the strings you join.</p>
+        </li>
+        <li>
+          <p>What does this code display?</p>
+<pre><code>pi = 22/7
+print(f'The value of pi is {pi:.3f}')</code></pre>
+          <p><code>The value of pi is 3.143</code>. In an f-string, <code>{pi:.3f}</code> shows the value of <code>pi</code> rounded to 3 decimal places.</p>
+        </li>
+        <li>
+          <p>What does this code display?</p>
+<pre><code>module = 'programming for engineering'
+print(module.upper())</code></pre>
+          <p><code>PROGRAMMING FOR ENGINEERING</code>. The <code>upper()</code> method turns every letter into a capital letter.</p>
+        </li>
+        <li>
+          <p>What does this code display?</p>
+<pre><code>a = ' Hello World '
+print(a.strip())</code></pre>
+          <p><code>Hello World</code>. The <code>strip()</code> method removes the spaces at the start and end of a string.</p>
+        </li>
+        <li>
+          <p>Which string method returns <code>-1</code> when the text you are looking for is not found: <code>index()</code>, <code>title()</code>, <code>find()</code> or <code>split()</code>?</p>
+          <p><code>find()</code>. (<code>index()</code> reports an error instead.)</p>
+        </li>
+        <li>
+          <p>What does this code display?</p>
+<pre><code>word = 'love'
+print(word.replace('e', 'o'))</code></pre>
+          <p><code>lovo</code>. The <code>replace()</code> method swaps every <code>'e'</code> for an <code>'o'</code>.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="if-statement" class="lesson">
+      <h2>If Statement</h2>
+      <p>Programs often need to check whether something is true before doing something about it. An <code>if</code> statement does exactly that: it tests a <strong>condition</strong>, and runs its <strong>action</strong> only when the condition is true. When the condition is false, Python skips the action and carries on below.</p>
+      <p>Try this code:</p>
+<pre><code>a = 7
+if a &lt; 10:
+    print('a is less than 10')</code></pre>
+      <p>Output:</p>
+<pre><code>a is less than 10</code></pre>
+      <p>Here <code>a &lt; 10</code> is the condition. Because 7 is less than 10, the condition is true, so the indented <code>print</code> line (the action) runs. If <code>a</code> were 12, nothing would be displayed.</p>
+
+      <h3>Indentation matters</h3>
+      <p>Python uses <strong>indentation</strong> (the spaces at the start of a line) to work out which lines belong together. This is not optional. The indented lines under an <code>if</code> are the ones that only run when the condition is true.</p>
+      <p>If you remove the indentation, Python cannot tell what belongs to the <code>if</code>:</p>
+<pre><code>a = 7
+if a &lt; 10:
+print('a is less than 10')</code></pre>
+      <p>This produces an error:</p>
+<pre><code>IndentationError: expected an indented block after 'if' statement on line 2</code></pre>
+    </section>
+
+    <section id="comparison-operators" class="lesson">
+      <h2>Comparison Operators</h2>
+      <p>The condition in an <code>if</code> statement is usually a comparison. A <strong>comparison operator</strong> compares two values and gives back a Boolean result, which is either <code>True</code> or <code>False</code>.</p>
+      <table>
+        <thead>
+          <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;</code></td><td>Less than</td><td><code>a &lt; b</code></td></tr>
+          <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>a &gt; b</code></td></tr>
+          <tr><td><code>&lt;=</code></td><td>Less than or equal to</td><td><code>a &lt;= b</code></td></tr>
+          <tr><td><code>&gt;=</code></td><td>Greater than or equal to</td><td><code>a &gt;= b</code></td></tr>
+          <tr><td><code>==</code></td><td>Equal to</td><td><code>a == b</code></td></tr>
+          <tr><td><code>!=</code></td><td>Not equal to</td><td><code>a != b</code></td></tr>
+        </tbody>
+      </table>
+      <p>Note that "equal to" is written with two equals signs. A single <code>=</code> is used to store a value in a variable, while <code>==</code> asks whether two values are the same.</p>
+
+      <h3>Practice</h3>
+      <p>Without running the code, work out what each <code>print()</code> displays:</p>
+<pre><code>a = 1
+b = 2
+print(a &lt; b)
+print(a &gt; b)
+print(a &lt;= b)
+print(a &gt;= b)
+print(a == b)
+print(a != b)</code></pre>
+      <p>Then type the code in and run it to check your answers. The output is:</p>
+<pre><code>True
+False
+True
+False
+False
+True</code></pre>
+    </section>
+
+    <section id="elif-else" class="lesson">
+      <h2>Elif and Else Statements</h2>
+      <p>An <code>if</code> statement on its own handles one possibility. To handle more, add <code>elif</code> (short for "else if") and <code>else</code>:</p>
+      <ul>
+        <li><code>elif</code> checks another condition, but only if every condition before it was false.</li>
+        <li><code>else</code> holds the final actions, which run only if every condition before it was false.</li>
+      </ul>
+      <p>Python works down the list from the top and runs the first block whose condition is true. Once it has run one block, it skips the rest.</p>
+<pre><code>a = int(input('Input a number: '))
+if a &lt; 10:
+    print('It is less than 10')
+elif a &gt; 10:
+    print('It is more than 10')
+else:
+    print('It is equal to 10')</code></pre>
+      <p>Run this code three times, entering 7, 15 and then 10. You should see:</p>
+      <ul>
+        <li>7 displays <code>It is less than 10</code></li>
+        <li>15 displays <code>It is more than 10</code></li>
+        <li>10 displays <code>It is equal to 10</code> (neither condition was true, so <code>else</code> ran)</li>
+      </ul>
+
+      <h3>Practice</h3>
+      <p>Write code that asks the user to respond to the statement "SEG has 8 diplomas. True or False?". If they enter <code>True</code>, display <code>You are correct</code>. If they enter <code>False</code>, display <code>You are wrong</code>. For anything else, display <code>Invalid response</code>.</p>
+      <p>One answer:</p>
+<pre><code>userinput = input('SEG has 8 diplomas. True or False?')
+if userinput == 'True':
+    print('You are correct')
+elif userinput == 'False':
+    print('You are wrong')
+else:
+    print('Invalid response')</code></pre>
+
+      <h3>Further practice: ignoring upper and lower case</h3>
+      <p>The code above only accepts exactly <code>True</code> or <code>False</code>. Typing <code>true</code> or <code>TRUE</code> gives "Invalid response". How could you make the input <strong>case insensitive</strong>, so that any capitalisation is accepted?</p>
+      <p>Hint: use <code>lower()</code> or <code>upper()</code>. Convert what the user typed to one case first, then compare it with text in that same case:</p>
+<pre><code>userinput = input('SEG has 8 diplomas. True or False?')
+if userinput.lower() == 'true':
+    print('You are correct')
+elif userinput.lower() == 'false':
+    print('You are wrong')
+else:
+    print('Invalid response')</code></pre>
+      <p>Using <code>upper()</code> works equally well, as long as you compare with <code>'TRUE'</code> and <code>'FALSE'</code>.</p>
+    </section>
+
+    <section id="logical-operators" class="lesson">
+      <h2>Logical Operators</h2>
+      <p>Sometimes one comparison is not enough. <strong>Logical operators</strong> combine conditions and give back a Boolean result (<code>True</code> or <code>False</code>).</p>
+      <table>
+        <thead>
+          <tr><th>Operator</th><th>What it does</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>and</code></td><td>True only if both conditions are true</td><td><code>a &gt; 0 and b &gt; 0</code></td></tr>
+          <tr><td><code>or</code></td><td>True if at least one condition is true</td><td><code>a &gt; 0 or b &gt; 0</code></td></tr>
+          <tr><td><code>not</code></td><td>Flips the result, so true becomes false and false becomes true</td><td><code>not(a &gt; 0)</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Practice</h3>
+      <p>Without running the code, work out what each <code>print()</code> displays:</p>
+<pre><code>a = -2
+b = 5
+c = 8
+print(a &gt; 0 and b &gt; 0)
+print(b &gt; 0 and c &gt; 0)
+print(a &lt; 0 or b &lt; 0)
+print(b &lt; 0 or c &lt; 0)
+print(not(a &gt; 0))</code></pre>
+      <p>Then run it to check. The output is:</p>
+<pre><code>False
+True
+True
+False
+True</code></pre>
+      <p>For example, the first line is <code>False</code> because <code>and</code> needs both sides to be true, and <code>a &gt; 0</code> is false when <code>a</code> is -2.</p>
+    </section>
+
+    <section id="exercises" class="lesson">
+      <h2>Practice Exercises</h2>
+      <p>Try these two exercises on your own before looking at the answers.</p>
+
+      <h3>Exercise 1: Grades</h3>
+      <p>Write code that asks the user to enter a score and displays the matching grade. If the score is out of range, display an error message.</p>
+      <table>
+        <thead>
+          <tr><th>Score</th><th>Grade</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>16 to 20 marks</td><td>A</td></tr>
+          <tr><td>14 to 15 marks</td><td>B</td></tr>
+          <tr><td>12 to 13 marks</td><td>C</td></tr>
+          <tr><td>10 to 11 marks</td><td>D</td></tr>
+          <tr><td>0 to 9 marks</td><td>F</td></tr>
+        </tbody>
+      </table>
+      <p>One answer. Each range uses <code>and</code> to check both ends, and the final <code>else</code> catches anything outside 0 to 20:</p>
+<pre><code>grade = int(input('Enter your score: '))
+if grade &gt;= 16 and grade &lt;= 20:
+    print('Grade: A')
+elif grade &gt;= 14 and grade &lt;= 15:
+    print('Grade: B')
+elif grade &gt;= 12 and grade &lt;= 13:
+    print('Grade: C')
+elif grade &gt;= 10 and grade &lt;= 11:
+    print('Grade: D')
+elif grade &gt;= 0 and grade &lt;= 9:
+    print('Grade: F')
+else:
+    print('Out of range')</code></pre>
+
+      <h3>Exercise 2: Ticket prices</h3>
+      <p>Write code that asks for the user's age, then asks whether they are a member (<code>Y</code>, <code>y</code>, <code>N</code> or <code>n</code> are accepted). Display the ticket price from this table:</p>
+      <table>
+        <thead>
+          <tr><th>Age</th><th>Member price</th><th>Non-member price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>13 and above</td><td>$18</td><td>$20</td></tr>
+          <tr><td>Below 13</td><td>$7</td><td>$10</td></tr>
+        </tbody>
+      </table>
+      <p>One answer. It combines an age check with a member check using <code>and</code>, and accepts either capital or small letters using <code>or</code>:</p>
+<pre><code>age = int(input('Enter your age: '))
+member = input('Are you a member? (Y/N)')
+if (age &gt;= 13) and (member == 'Y' or member == 'y'):
+    print('Ticket price: $18')
+elif (age &gt;= 13) and (member == 'N' or member == 'n'):
+    print('Ticket price: $20')
+elif (age &lt; 13) and (member == 'Y' or member == 'y'):
+    print('Ticket price: $7')
+elif (age &lt; 13) and (member == 'N' or member == 'n'):
+    print('Ticket price: $10')</code></pre>
+    </section>
+
+    <section id="summary" class="lesson">
+      <h2>Summary</h2>
+      <p>In this lesson you learned four connected ideas:</p>
+      <ul>
+        <li><strong>If statement:</strong> runs an indented block of code only when a condition is true.</li>
+        <li><strong>Comparison operators:</strong> <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code> and <code>!=</code> compare two values and give <code>True</code> or <code>False</code>.</li>
+        <li><strong>Elif and else statements:</strong> let one program choose between several possibilities, running only the first block that matches.</li>
+        <li><strong>Logical operators:</strong> <code>and</code>, <code>or</code> and <code>not</code> combine conditions into one result.</li>
+      </ul>
+    </section>
+  </main>
+
+  <div id="lesson-pager">
+    <button id="prev-button" type="button">Previous</button>
+    <button id="next-button" type="button">Next</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
