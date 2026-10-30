@@ -24,9 +24,12 @@ body {
 }
 
 .site-header,
+.tabs,
 #lesson-nav,
 main,
-#lesson-pager {
+#lesson-pager,
+#panel-quiz,
+#panel-simulator {
   max-width: 800px;
   margin: 0 auto;
 }
@@ -103,4 +106,93 @@ td {
   justify-content: space-between;
   gap: 8px;
   margin-top: 24px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.tab[aria-selected="true"] {
+  font-weight: bold;
+  border-bottom-width: 3px;
+  background: var(--bg);
+}
+
+.checkin,
+.quiz-item {
+  margin-top: 24px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.options button {
+  text-align: left;
+}
+
+.options .correct-option {
+  font-weight: bold;
+}
+
+.options .chosen::after {
+  content: " (your answer)";
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  padding: 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.feedback {
+  font-weight: bold;
+}
+
+.feedback.right::before {
+  content: "\2713 ";
+}
+
+.feedback.wrong::before {
+  content: "\2717 ";
+}
+
+fieldset {
+  margin: 12px 0;
+  border: 1px solid var(--border);
+}
+
+fieldset label,
+.sim-condition div {
+  display: inline-block;
+  margin: 4px 12px 4px 0;
+}
+
+.code-line {
+  display: block;
+}
+
+.code-line.running {
+  font-weight: bold;
+  background: var(--bg);
+}
+
+.code-line.running::before {
+  content: "\25B6  ";
+}
+
+.code-line:not(.running)::before {
+  content: "    ";
+  white-space: pre;
 }

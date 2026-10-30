@@ -26,18 +26,20 @@ The source slide deck is not stored in the repo. Update this section as the stru
 ## Feature Plan
 
 ### Site structure
-One page. JavaScript shows one lesson at a time (no separate pages). Top to bottom:
+One page. JavaScript switches between three tabs and, inside the Lesson tab, between lessons (no separate pages). Top to bottom:
 1. Header – course title and light/dark theme toggle.
-2. Menu – a link to each lesson; the current one is marked.
-3. Lesson – one section per topic of the slide deck (8 for Lesson 5), each with a heading and plain-language text.
-4. Previous/Next buttons.
+2. Tabs – Lesson, Quiz, Simulator.
+3. Lesson tab – a menu, one section per topic of the slide deck (8 for Lesson 5) with a heading, plain-language text and one check-in question, then Previous/Next buttons.
+4. Quiz tab – 8 questions, each marked right or wrong as it is answered; the score shows after all 8.
+5. Simulator tab – build an if/elif/else statement and see which block runs.
 
 ### How students move between sections
-- Click a menu link, or use Previous/Next, to switch lessons.
-- The address bar (`#lesson-id`) tracks the lesson, so the back button and shared links work.
+- Click a tab to switch between Lesson, Quiz and Simulator.
+- In the Lesson tab, click a menu link, or use Previous/Next, to switch lessons. Next is always available, whether or not the check-in was answered correctly.
+- The address bar (`#lesson-id`, `#quiz` or `#simulator`) tracks where the student is, so the back button and shared links work.
 - Planned later: remembering finished lessons in the browser.
 
 ### Phases
-- **Phase 1 – Course from the slides:** ask for the slides (PDF/PowerPoint) first, then build the page with all lessons, the menu, Previous/Next, and the light/dark toggle. Styling stays plain until it works. Quizzes, takeaways and saved progress come later.
+- **Phase 1 – Course from the slides:** ask for the slides (PDF/PowerPoint) first, then build the page with all lessons, the menu, Previous/Next, and the light/dark toggle. Styling stays plain until it works. Check-in questions, the Quiz tab and the Simulator tab are done. Takeaway boxes and saved progress come later.
 - **Phase 2 – Polish:** test on desktop/tablet/phone, check readability and keyboard use in both themes, fix issues.
 - **Phase 3 – Later ideas (only if asked):** extras such as a certificate or printable summary.

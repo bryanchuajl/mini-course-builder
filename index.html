@@ -12,6 +12,13 @@
     <button id="theme-toggle" type="button" aria-label="Switch between light and dark theme">Dark theme</button>
   </header>
 
+  <div class="tabs" role="tablist" aria-label="Course sections">
+    <button id="tab-lesson" class="tab" type="button" role="tab" data-tab="lesson" aria-controls="panel-lesson">Lesson</button>
+    <button id="tab-quiz" class="tab" type="button" role="tab" data-tab="quiz" aria-controls="panel-quiz">Quiz</button>
+    <button id="tab-simulator" class="tab" type="button" role="tab" data-tab="simulator" aria-controls="panel-simulator">Simulator</button>
+  </div>
+
+  <div id="panel-lesson" class="panel" role="tabpanel" aria-labelledby="tab-lesson">
   <nav id="lesson-nav" aria-label="Lessons">
     <ul>
       <li><a href="#outcomes">Outcomes</a></li>
@@ -292,6 +299,43 @@ elif (age &lt; 13) and (member == 'N' or member == 'n'):
   <div id="lesson-pager">
     <button id="prev-button" type="button">Previous</button>
     <button id="next-button" type="button">Next</button>
+  </div>
+  </div>
+
+  <div id="panel-quiz" class="panel" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+    <h2>Quiz</h2>
+    <p>Eight questions on the whole lesson. After you answer each one, you will see whether it was right. Your score appears once all eight are answered.</p>
+    <p id="quiz-progress" role="status"></p>
+    <div id="quiz-questions"></div>
+    <div id="quiz-score" role="status" hidden>
+      <h3>Your score: <span id="quiz-score-value"></span></h3>
+      <button id="quiz-retry" type="button">Try again</button>
+    </div>
+  </div>
+
+  <div id="panel-simulator" class="panel" role="tabpanel" aria-labelledby="tab-simulator" hidden>
+    <h2>Practice Simulator</h2>
+    <p>Build an <code>if</code> / <code>elif</code> / <code>else</code> statement and watch how Python works through it. Pick values for <code>a</code> and <code>b</code>, then set a condition for the <code>if</code> and for the <code>elif</code>. Each condition can use a comparison operator, join two comparisons with <code>and</code> or <code>or</code>, and be flipped with <code>not</code>.</p>
+    <fieldset>
+      <legend>Values</legend>
+      <label>a = <input id="sim-a" type="number" step="any" value="7"></label>
+      <label>b = <input id="sim-b" type="number" step="any" value="3"></label>
+    </fieldset>
+    <fieldset>
+      <legend><code>if</code> condition</legend>
+      <div id="sim-if" class="sim-condition"></div>
+    </fieldset>
+    <fieldset>
+      <legend><code>elif</code> condition</legend>
+      <div id="sim-elif" class="sim-condition"></div>
+    </fieldset>
+    <button id="sim-reset" type="button">Reset</button>
+
+    <h3>Your code</h3>
+    <pre id="sim-code"></pre>
+    <h3>What Python does</h3>
+    <ul id="sim-trace"></ul>
+    <p id="sim-output" role="status"></p>
   </div>
 
   <script src="script.js"></script>
